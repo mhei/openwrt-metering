@@ -41,6 +41,11 @@ define Package/libsomsp/description
   OMS Group (http://www.oms-group.org/) to identify meter readings.
 endef
 
+define Build/Configure
+	( cd "$(PKG_BUILD_DIR)"; ./autogen.sh )
+	$(call Build/Configure/Default)
+endef
+
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)
 	$(CP) $(PKG_INSTALL_DIR)/* $(1)/
