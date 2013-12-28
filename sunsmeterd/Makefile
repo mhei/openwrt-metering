@@ -29,7 +29,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/sunsmeterd
   SECTION:=metering
   CATEGORY:=Metering
-  DEPENDS:=+libsomsp +libmodbus
+  DEPENDS:=+libsomsp +libmodbus +libdaemon
   TITLE:=SOMSP/SunSpec converter daemon
 endef
 
@@ -37,6 +37,11 @@ define Package/sunsmeterd/description
   The sunsmeter daemon receives a SOMSP stream (simple open metering specification
   protocol) from a metering daemon and provides this data using SunSpec Alliance's
   meter modell via Modbus (e.g. Modbus/RTU via RS-485... or Modbus/TCP via Ethernet).
+endef
+
+define Build/Configure
+	( cd "$(PKG_BUILD_DIR)"; ./autogen.sh )
+	$(call Build/Configure/Default)
 endef
 
 define Package/sunsmeterd/conffiles
